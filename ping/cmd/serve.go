@@ -6,8 +6,8 @@ package cmd
 
 import (
 	"fmt"
-
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // serveCmd represents the serve command
@@ -26,15 +26,7 @@ to quickly create a Cobra application.`,
 }
 
 func init() {
+	serveCmd.PersistentFlags().IntP("p", "p", 8080, "port where it will run")
+	viper.BindPFlag("app.http_port", serveCmd.PersistentFlags().Lookup("p"))
 	rootCmd.AddCommand(serveCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// serveCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// serveCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
